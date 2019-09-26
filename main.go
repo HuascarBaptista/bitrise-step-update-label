@@ -16,7 +16,7 @@ type Config struct {
 	APIToken  string `env:"api_token,required"`
 	BaseURL   string `env:"base_url,required"`
 	IssueKeys string `env:"jira_tickets,required"`
-	AdditionalLabel   string `env:"label"`
+	AdditionalLabel   string `env:"label,required"`
 }
 
 func main() {

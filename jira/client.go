@@ -101,18 +101,14 @@ func (client *Client) PostIssueAddLabel(comments []Comment, AdditionalLabel stri
 type TransitionRequest struct {
 	Update Update `json:"update"`
 }
-type Add struct {
-	Body string `json:"body"`
+type Labels struct {
+	Add string `json:"add"`
 }
 type Set struct {
 	Name string `json:"name"`
 }
-type JsonLabels struct {
-	label string `json:"add"`
-}
-
 type Update struct {
-	Labels []JsonLabels `json:"labels"`
+	Labels      []Labels      `json:"labels"`
 }
 
 func (client *Client) postIssueLabel(comment Comment, AdditionalLabel string, ch chan response) {
@@ -123,7 +119,7 @@ func (client *Client) postIssueLabel(comment Comment, AdditionalLabel string, ch
 	}
 	newFields := &TransitionRequest{
 		Update{
-			Labels: []JsonLabels{{label: AdditionalLabel}},
+			Labels: []Labels{{Add: AdditionalLabel}},
 		},
 	}
 	request, err := createRequest(http.MethodPut, requestURL, client.headers, newFields)
