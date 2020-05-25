@@ -12,11 +12,11 @@ import (
 
 // Config ...
 type Config struct {
-	UserName  string `env:"user_name,required"`
-	APIToken  string `env:"api_token,required"`
-	BaseURL   string `env:"base_url,required"`
-	IssueKeys string `env:"jira_tickets,required"`
-	AdditionalLabel   string `env:"label,required"`
+	UserName        string `env:"user_name,required"`
+	APIToken        string `env:"api_token,required"`
+	BaseURL         string `env:"base_url,required"`
+	IssueKeys       string `env:"jira_tickets"`
+	AdditionalLabel string `env:"label,required"`
 }
 
 func main() {
@@ -24,7 +24,10 @@ func main() {
 	if err := stepconf.Parse(&cfg); err != nil {
 		failf("Issue with input: %s", err)
 	}
-
+	if len(cfg.IssueKeys) == 0 {
+		log.Infof("NO TICKETS:")
+		os.Exit(0)
+	}
 	stepconf.Print(cfg)
 	fmt.Println()
 

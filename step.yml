@@ -81,7 +81,6 @@ inputs:
       title: Jira Tickets
       summary: Jira Tickets separated with `|`
       description: Jira Tickets separated with `|` as SIG-230|SIG-245
-      is_required: true
   - base_url:
     opts:
       title: Jira base URL.
